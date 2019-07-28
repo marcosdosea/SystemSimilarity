@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.designroleminer.ClassMetricResult;
-import org.designroleminer.technique.DesignRoleTechnique;
+import org.designroleminer.threshold.DesignRoleTechnique;
 
 public class SimilarityManager {
 

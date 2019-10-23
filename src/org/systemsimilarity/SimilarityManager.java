@@ -37,7 +37,7 @@ public class SimilarityManager {
 		for (String projeto : projetosReferencia) {
 			listaUnicoProjeto = new ArrayList<String>();
 			listaUnicoProjeto.add(projeto);
-			mapProjetosMetricas.put(projeto, executor.getMetricsFromProjects(listaUnicoProjeto, pastaMetricas));
+			mapProjetosMetricas.put(projeto, executor.getMetricsFromProjects(listaUnicoProjeto, pastaMetricas, true));
 		}
 
 		List<SimilarityResult> listSimilarityResult = new ArrayList<SimilarityResult>();
@@ -74,6 +74,8 @@ public class SimilarityManager {
 			totalLocProjeto1 -= linhasDeCodigoPorDesignRoleProjeto1.remove("TEST");
 		if (linhasDeCodigoPorDesignRoleProjeto1.get("UNDEFINED") != null)
 			totalLocProjeto1 -= linhasDeCodigoPorDesignRoleProjeto1.remove("UNDEFINED");
+		if (linhasDeCodigoPorDesignRoleProjeto1.get("ENTITY") != null)
+			totalLocProjeto1 -= linhasDeCodigoPorDesignRoleProjeto1.remove("ENTITY");
 
 		HashMap<String, Long> linhasDeCodigoPorDesignRoleProjeto2 = new HashMap<String, Long>();
 
@@ -83,6 +85,8 @@ public class SimilarityManager {
 			totalLocProjeto2 -= linhasDeCodigoPorDesignRoleProjeto2.remove("TEST");
 		if (linhasDeCodigoPorDesignRoleProjeto2.get("UNDEFINED") != null)
 			totalLocProjeto2 -= linhasDeCodigoPorDesignRoleProjeto2.remove("UNDEFINED");
+		if (linhasDeCodigoPorDesignRoleProjeto2.get("ENTITY") != null)
+			totalLocProjeto2 -= linhasDeCodigoPorDesignRoleProjeto2.remove("ENTITY");
 
 		Map<CharSequence, Double> drProjetoPercentual1 = new HashMap<CharSequence, Double>();
 		Map<CharSequence, Double> drProjetoPercentual2 = new HashMap<CharSequence, Double>();

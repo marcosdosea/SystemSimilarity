@@ -1,6 +1,7 @@
 package org.systemsimilarity;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -9,6 +10,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.designroleminer.ClassMetricResult;
+import org.designroleminer.MetricReport;
 import org.designroleminer.threshold.DesignRoleTechnique;
 import org.designroleminer.threshold.TechniqueExecutor;
 
@@ -30,7 +32,7 @@ public class SimilarityManager {
 	
 	public List<SimilarityResult> calculate(ArrayList<String> projetosReferencia, String pastaMetricas) {
 
-		Map<String, ArrayList<ClassMetricResult>> mapProjetosMetricas = new HashMap<String, ArrayList<ClassMetricResult>>();
+		Map<String, MetricReport> mapProjetosMetricas = new HashMap<String, MetricReport>();
 		TechniqueExecutor executor = new TechniqueExecutor(new DesignRoleTechnique());
 
 		ArrayList<String> listaUnicoProjeto;
@@ -46,12 +48,12 @@ public class SimilarityManager {
 		while (it1.hasNext()) {
 			String projeto1 = it1.next();
 			it2 = mapProjetosMetricas.keySet().iterator();
-			ArrayList<ClassMetricResult> metricasProjeto1 = mapProjetosMetricas.get(projeto1);
-			ArrayList<ClassMetricResult> metricasProjeto2;
+			MetricReport metricasProjeto1 = mapProjetosMetricas.get(projeto1);
+			MetricReport metricasProjeto2;
 			while (it2.hasNext()) {
 				String projeto2 = it2.next();
 				metricasProjeto2 = mapProjetosMetricas.get(projeto2);
-				Double similarity = calculate(metricasProjeto1, metricasProjeto2);
+				Double similarity = calculate(metricasProjeto1.all(), metricasProjeto2.all());
 				SimilarityResult result = new SimilarityResult();
 				result.setProject1(projeto1);
 				result.setProject2(projeto2);
@@ -62,7 +64,7 @@ public class SimilarityManager {
 		return listSimilarityResult;
 	}
 
-	public Double calculate(ArrayList<ClassMetricResult> projeto1, ArrayList<ClassMetricResult> projeto2) {
+	public Double calculate(Collection<ClassMetricResult> projeto1, Collection<ClassMetricResult> projeto2) {
 
 		DesignRoleTechnique designRoleTechinique = new DesignRoleTechnique();
 

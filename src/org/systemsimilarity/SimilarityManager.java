@@ -39,7 +39,7 @@ public class SimilarityManager {
 		for (String projeto : projetosReferencia) {
 			listaUnicoProjeto = new ArrayList<String>();
 			listaUnicoProjeto.add(projeto);
-			mapProjetosMetricas.put(projeto, executor.getMetricsFromProjects(listaUnicoProjeto, pastaMetricas, true));
+			mapProjetosMetricas.put(projeto, executor.getMetricsFromProjects(listaUnicoProjeto, pastaMetricas, ""));
 		}
 
 		List<SimilarityResult> listSimilarityResult = new ArrayList<SimilarityResult>();

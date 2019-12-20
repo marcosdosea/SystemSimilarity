@@ -11,16 +11,15 @@ import java.util.Set;
 
 import org.designroleminer.ClassMetricResult;
 import org.designroleminer.MetricReport;
-import org.designroleminer.threshold.DesignRoleTechnique;
+import org.designroleminer.threshold.DoseaDesignRoleTechnique;
 import org.designroleminer.threshold.TechniqueExecutor;
 
 public class SimilarityManager {
 
-	
-	
-	public ArrayList<String> filterSimilarProjects(String project, List<SimilarityResult> listSimilarity, double threshold) {
+	public ArrayList<String> filterSimilarProjects(String project, List<SimilarityResult> listSimilarity,
+			double threshold) {
 		ArrayList<String> filteredProjects = new ArrayList<String>();
-		for(SimilarityResult result: listSimilarity) {
+		for (SimilarityResult result : listSimilarity) {
 			if (result.getProject1().equals(project)) {
 				if (result.getSimilarity() >= threshold) {
 					filteredProjects.add(result.getProject2());
@@ -29,11 +28,11 @@ public class SimilarityManager {
 		}
 		return filteredProjects;
 	}
-	
+
 	public List<SimilarityResult> calculate(ArrayList<String> projetosReferencia, String pastaMetricas) {
 
 		Map<String, MetricReport> mapProjetosMetricas = new HashMap<String, MetricReport>();
-		TechniqueExecutor executor = new TechniqueExecutor(new DesignRoleTechnique());
+		TechniqueExecutor executor = new TechniqueExecutor();
 
 		ArrayList<String> listaUnicoProjeto;
 		for (String projeto : projetosReferencia) {
@@ -66,7 +65,7 @@ public class SimilarityManager {
 
 	public Double calculate(Collection<ClassMetricResult> projeto1, Collection<ClassMetricResult> projeto2) {
 
-		DesignRoleTechnique designRoleTechinique = new DesignRoleTechnique();
+		DoseaDesignRoleTechnique designRoleTechinique = new DoseaDesignRoleTechnique();
 
 		HashMap<String, Long> linhasDeCodigoPorDesignRoleProjeto1 = new HashMap<String, Long>();
 		Long totalLocProjeto1 = designRoleTechinique.obterTotalLinhasCodigoPorDesignRole(projeto1,

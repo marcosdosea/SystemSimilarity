@@ -11,7 +11,7 @@ import java.util.Set;
 
 import org.designroleminer.ClassMetricResult;
 import org.designroleminer.MetricReport;
-import org.designroleminer.threshold.DoseaDesignRoleTechnique;
+import org.designroleminer.threshold.DoseaReferenceTechnique;
 import org.designroleminer.threshold.TechniqueExecutor;
 
 public class SimilarityManager {
@@ -65,7 +65,7 @@ public class SimilarityManager {
 
 	public Double calculate(Collection<ClassMetricResult> projeto1, Collection<ClassMetricResult> projeto2) {
 
-		DoseaDesignRoleTechnique designRoleTechinique = new DoseaDesignRoleTechnique();
+		DoseaReferenceTechnique designRoleTechinique = new DoseaReferenceTechnique();
 
 		HashMap<String, Long> linhasDeCodigoPorDesignRoleProjeto1 = new HashMap<String, Long>();
 		Long totalLocProjeto1 = designRoleTechinique.obterTotalLinhasCodigoPorDesignRole(projeto1,
@@ -92,14 +92,18 @@ public class SimilarityManager {
 		Map<CharSequence, Double> drProjetoPercentual1 = new HashMap<CharSequence, Double>();
 		Map<CharSequence, Double> drProjetoPercentual2 = new HashMap<CharSequence, Double>();
 
-		for (CharSequence key : linhasDeCodigoPorDesignRoleProjeto1.keySet()) {
-			Double valor = ((double) linhasDeCodigoPorDesignRoleProjeto1.get(key) / totalLocProjeto1) * 100;
-			drProjetoPercentual1.put(key, valor);
+		for (CharSequence designRole : linhasDeCodigoPorDesignRoleProjeto1.keySet()) {
+			if (!designRole.equals("TEST") && !designRole.equals("ENTITY") && !designRole.equals("UNDEFINED")) {
+				Double valor = ((double) linhasDeCodigoPorDesignRoleProjeto1.get(designRole) / totalLocProjeto1) * 100;
+				drProjetoPercentual1.put(designRole, valor);
+			}
 		}
 
-		for (CharSequence key : linhasDeCodigoPorDesignRoleProjeto2.keySet()) {
-			Double valor = ((double) linhasDeCodigoPorDesignRoleProjeto2.get(key) / totalLocProjeto2) * 100;
-			drProjetoPercentual2.put(key, valor);
+		for (CharSequence designRole : linhasDeCodigoPorDesignRoleProjeto2.keySet()) {
+			if (!designRole.equals("TEST") && !designRole.equals("ENTITY") && !designRole.equals("UNDEFINED")) {
+				Double valor = ((double) linhasDeCodigoPorDesignRoleProjeto2.get(designRole) / totalLocProjeto2) * 100;
+				drProjetoPercentual2.put(designRole, valor);
+			}
 		}
 
 		return cosineSimilarity(drProjetoPercentual1, drProjetoPercentual2);

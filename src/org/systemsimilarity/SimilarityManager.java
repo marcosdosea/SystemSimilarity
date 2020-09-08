@@ -11,8 +11,8 @@ import java.util.Set;
 
 import org.designroleminer.ClassMetricResult;
 import org.designroleminer.MetricReport;
-import org.designroleminer.threshold.DoseaReferenceTechnique;
-import org.designroleminer.threshold.TechniqueExecutor;
+import org.threshold.DoseaReferenceTechnique;
+import org.threshold.TechniqueExecutor;
 
 public class SimilarityManager {
 
@@ -112,10 +112,8 @@ public class SimilarityManager {
 	/**
 	 * Calculates the cosine similarity for two given vectors.
 	 *
-	 * @param leftVector
-	 *            left vector
-	 * @param rightVector
-	 *            right vector
+	 * @param leftVector  left vector
+	 * @param rightVector right vector
 	 * @return cosine similarity between the two vectors
 	 */
 	private Double cosineSimilarity(final Map<CharSequence, Double> leftVector,
@@ -147,10 +145,8 @@ public class SimilarityManager {
 	/**
 	 * Returns a set with strings common to the two given maps.
 	 * 
-	 * @param leftVector
-	 *            left vector map
-	 * @param rightVector
-	 *            right vector map
+	 * @param leftVector  left vector map
+	 * @param rightVector right vector map
 	 * @return common strings
 	 */
 	private Set<CharSequence> getIntersection(final Map<CharSequence, Double> leftVector,
@@ -165,12 +161,9 @@ public class SimilarityManager {
 	 * means that if a vector is longer than other, then a smaller part of it will
 	 * be used to compute the dot product.
 	 * 
-	 * @param leftVector
-	 *            left vector
-	 * @param rightVector
-	 *            right vector
-	 * @param intersection
-	 *            common elements
+	 * @param leftVector   left vector
+	 * @param rightVector  right vector
+	 * @param intersection common elements
 	 * @return the dot product
 	 */
 	private double dot(final Map<CharSequence, Double> leftVector, final Map<CharSequence, Double> rightVector,

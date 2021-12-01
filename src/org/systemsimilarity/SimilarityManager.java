@@ -65,7 +65,7 @@ public class SimilarityManager {
 
 	public Double calculate(Collection<ClassMetricResult> projeto1, Collection<ClassMetricResult> projeto2) {
 
-		DoseaReferenceTechnique designRoleTechinique = new DoseaReferenceTechnique();
+		 DoseaReferenceTechnique designRoleTechinique = new DoseaReferenceTechnique();
 
 		HashMap<String, Long> linhasDeCodigoPorDesignRoleProjeto1 = new HashMap<String, Long>();
 		Long totalLocProjeto1 = designRoleTechinique.obterTotalLinhasCodigoPorDesignRole(projeto1,
